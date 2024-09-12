@@ -1,0 +1,831 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  /* 
+        Change favorite color
+        Default: hsl(230, 55%, 55%)
+        Purple: hsl(245, 55%, 55%) - Blue: hsl(210, 55%, 55%)
+        Pink: hsl(340, 55%, 55%) - Green: hsl(162, 55%, 55%)
+        Orange: hsl(14, 55%, 55%)
+
+        For more colors visit: https://colors.dopely.top/color-pedia
+        -> Choose any color 
+        -> Click on tab (Color Conversion)
+        -> Copy the color mode (HSL)
+  */
+  --hue: 230;/*default hue*/
+  --first-color: hsl(var(--hue), 55%, 55%);
+  --first-color-light: hsl(var(--hue), 55%, 65%);
+  --first-color-alt: hsl(var(--hue), 50%, 50%);
+  --title-color: hsl(var(--hue), 30%, 95%);
+  --text-color: hsl(var(--hue), 20%, 80%);
+  --text-color-light: hsl(var(--hue), 20%, 70%);
+  --body-color: hsl(var(--hue), 40%, 16%);
+  --container-color: hsl(var(--hue), 40%, 20%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Syne", sans-serif;
+  --biggest-font-size: 3rem;
+  --big-font-size: 1.5rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.813rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*========== Responsive typography==========*/
+@media screen and (min-width: 1150px) {
+  :root {
+    --biggest-font-size: 5.5rem;
+    --big-font-size: 2.75rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1.125rem;
+    --small-font-size: 0.875rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+input,
+textarea,
+button {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+input,
+button,
+textarea {
+  border: none;
+  outline: none;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+}
+
+p {
+  line-height: 130%;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Toggle switch container */
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Hide the actual checkbox */
+.toggle-switch input[type="checkbox"] {
+  display: none;
+}
+
+/* Switch styling */
+.toggle-switch label {
+  position: relative;
+  width: 50px;
+  height: 25px;
+  background-color: black;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+/* Bulb icon inside the switch */
+.toggle-switch label span {
+  color: white;
+  transition: transform 0.3s ease, color 0.3s ease;
+  border: 6px solid #212121;
+  background-color: #333;
+  border-radius: 14px;
+}
+
+.toggle-switch label span i {
+  color: rgba(255,255,255,0.25);
+  font-size: 2em;
+  transition: 0.5s;
+}
+
+/* Checked state - when the switch is clicked */
+.toggle-switch input[type="checkbox"]:checked + label {
+  background-color: #dcdceb;
+}
+
+.toggle-switch input[type="checkbox"]:checked + label span {
+  transform: scale(1.2); /* Light bulb effect when active */
+  color: white; /* Optional: You can change to a different light effect */
+}
+
+
+
+/* Basic styling for the card */
+.card {
+  position: relative;
+  border-radius: 45px;
+  background: linear-gradient(71deg, #080509, #1a171c, #080509); /* Card background */
+  padding: 20px;
+  border: 2px solid transparent; /* Initial transparent border */
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* Hover effect on the card */
+.card:hover {
+  border-color: white; /* White border on hover */
+  box-shadow: 0px 0px 15px 5px rgba(248, 186, 186, 0.2); /* Subtle glow on hover */
+}
+
+/* Content inside the card remains unchanged */
+.card .container-card, .card .card-title {
+  position: relative;
+  z-index: 1; /* Keep content on top */
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding-block: 5rem 2rem;
+}
+
+.section__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-bold);
+  margin-bottom: 2rem;
+}
+
+.main {
+  overflow: hidden;
+}
+
+/*=============== HEADER & NAV ===============*/
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  z-index: var(--z-fixed);
+}
+
+.nav {
+  position: relative;
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo {
+  color: var(--title-color);
+  font-weight: var(--font-bold);
+}
+
+.nav__toggle,
+.nav__close {
+  font-size: 1.5rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+/* Navigation for mobile devices */
+@media screen and (max-width: 1150px) {
+  .nav__menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    background-color: hsla(var(--hue), 70%, 4%, 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    width: 80%;
+    height: 100%;
+    padding: 7rem 3rem;
+    transition: right 0.4s;
+  }
+
+  .footer .button {
+    width: 100%; /* Ensure footer buttons are also full width */
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3rem;
+}
+
+.nav__link {
+  position: relativ;
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  transition: color 0.4s;
+}
+
+.nav__link::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: var(--first-color-light);
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  transition: width 0.3s;
+}
+
+.nav__link:hover {
+  color: var(--first-color-light);
+}
+
+.nav__link:hover::after {
+  width: 30%;
+}
+
+.nav__close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+}
+/* Show menu */
+.show-menu {
+  right: 0;
+}
+
+/* Add blur header */
+.blur-header::after {
+  content: "";
+  position: absolute;
+  width: 1000%;
+  height: 100%;
+  background-color: hsla(var(--hue), 70%, 4%, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Active link */
+.active_link {
+  color: var(--first-color-light);
+}
+
+.active_link::after {
+  width: 30%;
+}
+
+/*=============== HOME ===============*/
+.home__container {
+  row-gap: 2rem;
+  /* padding-top: 1rem; */
+}
+
+.home__img {
+  width: 220px;
+  justify-self: center;
+  mask-image: linear-gradient(
+    to bottom,
+    hsla(var(--hue), 40%, 16%) 60%,
+    transparent 100%
+  );
+}
+
+.home__name {
+  font-size: var(--big-font-size);
+  font-weight: var(--font-bold);
+  word-break: break-word;
+  /* margin-bottom: 1rem; */
+  justify-self: center;
+  align-items: center;
+}
+
+.my-home-name {
+  margin-top: -3rem; /* Moves the content closer to the navbar */
+  padding-top: 0; /* Removes unnecessary padding */
+}
+
+.home__profession {
+  position: relative;
+  font-size: var(--h2-font-size);
+  color: var(--text-color);
+  justify-self: center;
+  align-items: center;
+}
+
+.home__profession::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  width: 25%;
+  height: 3px;
+  background-color: var(--text-color);
+}
+
+
+
+/* Animate scroll icon */
+@keyframes scroll-dowm {
+  0% {
+    transform: transparent(-1rem);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0.6rem);
+    opacity: 0;
+  }
+}
+
+/*=============== BUTTON ===============*/
+.button {
+  display: inline-flex;
+  justify-content: center;
+  background-color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  padding: 1.25rem 2rem;
+  transition: background-color 0.4s;
+}
+
+.buttons{
+  grid-template-columns: repeat(2, max-content);
+}
+
+.button:hover {
+  background-color: var(--first-color-alt);
+}
+/* ==========Insurance============================================= */
+.gradient-cards {
+  display: grid;
+  grid-template-columns: repeat(1fr);
+  gap: 32px;
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.container-title {
+  text-align: center;
+  padding: 0 !important;
+  margin-bottom: 40px;
+  font-size: 40px;
+  color: #fff;
+  font-weight: 600;
+  line-height: 60px;
+}
+
+.card {
+  max-width: 550px;
+  border: 0;
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* Ensure only the SVG is centered within the card */
+.card svg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px; /* Add space below the SVG */
+  width: 100px; /* Set your desired size */
+  height: 100px; /* Set your desired size */
+}
+
+.svg-1 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px; /* Add space below the SVG */
+  width: 100px; /* Set your desired size */
+  height: 100px; /* Set your desired size */
+}
+
+
+.container-card {
+  position: relative;
+  border: 2px solid transparent;
+  background: linear-gradient(71deg, #080509, #1a171c, #080509);
+  background-clip: padding-box;
+  border-radius: 45px;
+  padding: 20px;
+  img {
+    margin-bottom: 32px;
+  }
+}
+
+.logo{
+  display: grid;
+  grid-template-columns: repeat(2,80px);
+  gap: 8rem;
+  align-items: center;
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.logo-1{
+  display: grid;
+  grid-template-columns: repeat(3,80px);
+  gap: 8rem;
+  align-items: center;
+  @media screen and (max-width: 991px) {
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+
+.bg-white-box{
+  position: relative;
+}
+
+
+.bg-white-box::after{
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  content: "";
+  z-index: -1;
+  border-radius: 45px;
+}
+
+.bg-white-box::after {
+  background: linear-gradient(71deg, #d4d8ec, #b1f3f0, #d4d8ec);
+}
+
+
+
+.card-title {
+  font-weight: 600;
+  color: black;
+  letter-spacing: -0.02em;
+  line-height: 40px;
+  font-style: normal;
+  font-size: 20px;
+  padding-bottom: 8px;
+}
+
+.part-2{
+  padding-top: 30px;
+}
+/*=============== WORKS ===============*/
+.work {
+  background-color: var(--container-color);
+}
+
+/*=============== CONTACT ===============*/
+
+
+.contact__social {
+  grid-template-columns: repeat(4, max-content);
+  justify-content: center;
+  padding-top: 2rem;
+}
+.contact__social-1 {
+  grid-template-columns: repeat(4, max-content);
+  justify-content: center;
+}
+
+.contact__social-link {
+  color: var(--title-color);
+  display: inline-flex;
+  column-gap: 0.25rem;
+  align-items: center;
+  transition: color 0.4s;
+}
+
+.contact__social-link i {
+  font-size: 3rem;
+}
+
+.contact__social-link:hover {
+  color: var(--first-color-light);
+}
+
+/*=============== FOOTER ===============*/
+.footer {
+  background-color: var(--container-color);
+}
+
+.footer__container {
+  padding-block: 3rem 2rem;
+  row-gap: 3rem;
+}
+
+.footer__links {
+  display: flex;
+  justify-content: center;
+  column-gap: 2.5rem;
+}
+
+.footer__link {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  transition: color 0.4s;
+}
+
+.footer__link:hover {
+  color: var(--first-color-light);
+}
+
+.footer__copy {
+  color: var(--title-color);
+  font-size: var(--small-font-size);
+  text-align: center;
+  justify-self: center;
+  grid-column: 1 / -1; /* Makes it span across all columns if the parent is a grid */
+}
+
+/*=============== SCROLL BAR ===============*/
+::-webkit-scrollbar {
+  width: 0.6rem;
+  background-color: hsl(var(--hue), 20%, 20%);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--hue), 20%, 30%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--hue), 20%, 40%);
+}
+
+/*=============== SCROLL UP ===============*/
+.scrollup {
+  position: fixed;
+  right: 1rem;
+  bottom: -50%;
+  background-color: var(--container-color);
+  display: inline-flex;
+  padding: 6px;
+  color: var(--title-color);
+  font-size: 1.25rem;
+  box-shadow: 0 4px 12px hsla(var(--hue), 30%, 8%, 0.3);
+  z-index: var(--z-tooltip);
+  transition: bottom 0.4s, transform 0.4s;
+}
+
+.scrollup:hover {
+  transform: translateY(-0.5rem);
+}
+
+/* Show Scroll Up */
+.show-scroll {
+  bottom: 3rem;
+}
+
+
+/* hover effects in card */
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 300px) {
+  .container {
+    margin-inline: 1rem;
+  }
+
+  .skills__content {
+    grid-template-columns: repeat(2, max-content);
+  }
+
+  .home__button {
+    width: 100%; /* Make the button full width */
+    text-align: center;
+    margin-bottom: 1rem; /* Add space between buttons */
+  }
+
+  .footer__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer .button {
+    width: 100%; /* Ensure footer buttons are also full width */
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-weight: 600;
+    color: white;
+    letter-spacing: -0.02em;
+    line-height: 30px;
+    font-style: normal;
+    font-size: 15px;
+    padding-bottom: 8px;
+  }
+
+  .footer .button {
+    width: 100%; /* Ensure footer buttons are also full width */
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 540px) {
+  .home__container,
+  .work__container,
+  .info__container,
+  .services__container,
+  .contact__container {
+    grid-template-columns: 350px;
+    justify-content: center;
+  }
+
+  .footer .button {
+    width: 100%; /* Ensure footer buttons are also full width */
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .nav__menu {
+    width: 50%;
+  }
+
+  .home__container {
+    grid-template-columns: repeat(2, 350px);
+  }
+
+  .home__data {
+    align-self: flex-end;
+    padding-top: 2rem;
+    order: -1;
+  }
+
+  .home__button {
+    width: 100%; /* Make the button full width */
+    text-align: center;
+    margin-bottom: 1rem; /* Add space between buttons */
+  }
+
+  .footer__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer .button {
+    width: 100%; /* Ensure footer buttons are also full width */
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  
+
+}
+
+/* For large devices */
+@media screen and (min-width: 1150px) {
+  .container {
+    margin-inline: auto;
+  }
+
+  .section {
+    padding-block: 7rem 2rem;
+  }
+
+  .section__title {
+    margin-bottom: 4rem;
+  }
+
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+  }
+
+  .nav__toggle,
+  .nav__close {
+    display: none;
+  }
+
+  .nav__menu {
+    width: initial;
+  }
+
+  .nav__list {
+    flex-direction: row;
+    column-gap: 4rem;
+  }
+
+  .home__container {
+    grid-template-columns: 375px 350px;
+    gap: 3rem 16rem;
+  }
+
+  .home__img {
+    width: 350px;
+  }
+
+  .home__name {
+    margin-bottom: 1.5rem;
+  }
+
+  .home__profession::after {
+    bottom: -1rem;
+    width: 35%;
+  }
+
+  .work__container {
+    grid-template-columns: repeat(2, 540px);
+    gap: 2.5rem;
+  }
+
+  .contact__social {
+    grid-template-columns: repeat(4, max-content);
+    column-gap: 5rem;
+  }
+
+  .contact__social-1 {
+    grid-template-columns: repeat(4, max-content);
+    justify-content: center;
+    gap: 4rem;
+  }
+
+  .footer__container {
+    padding-block: 3rem;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: space-between;
+  }
+
+  .footer .button {
+    width: 100%; /* Ensure footer buttons are also full width */
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  }
+
+  .scrollup {
+    right: 3rem;
+  }
+
+  
+
