@@ -528,6 +528,16 @@ img {
   font-size: 20px;
   padding-bottom: 8px;
 }
+.card-title1 {
+  font-weight: 600;
+  color: black;
+  letter-spacing: -0.02em;
+  line-height: 40px;
+  font-style: normal;
+  font-size: 18px;
+  padding-bottom: 8px;
+  margin-left: 27px;
+}
 
 .part-2{
   padding-top: 30px;
